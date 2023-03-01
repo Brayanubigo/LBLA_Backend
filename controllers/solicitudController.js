@@ -15,15 +15,15 @@ const registrar = async (req,res) =>{
         const solicitud = new Solicitud(req.body);
         const solicitudGuardada = await solicitud.save();
         
-        // emailNotificacion({
-        //     email,
-        //     nombre,
-        //     tipo,
-        //     curso,
-        //     cantidad,
-        //     asignatura,
-        //     descripcion
-        // })
+        emailNotificacion({
+            email,
+            nombre,
+            tipo,
+            curso,
+            cantidad,
+            asignatura,
+            descripcion
+        })
         
         res.json(solicitudGuardada);
     } catch (error) {
