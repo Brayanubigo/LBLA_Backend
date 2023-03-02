@@ -8,13 +8,16 @@ const emailRegistro= async(datos) => {
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS
+        },
+        tls:{
+          rejectUnauthorized: false
         }
       });
-      const {email, nombre, token} =datos;
+      const {email, nombre, token} = datos;
 
       //enviar email
       const info = await transport.sendMail({
-        from: "LBLA SISTEMA DE SOLICITUD",
+        from: "lblainsumos@gmail.com",
         to: email,
         subject: 'Comprueba tu cuenta en LBLA SOLICITUDES',
         text: 'Comprueba tu cuenta en LBLA SOLICITUDES',

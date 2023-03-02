@@ -8,14 +8,14 @@ import CursoRoutes from "./routes/CursoRoutes.js"
 import SolicitudRoutes from "./routes/SolicitudRoutes.js"
 import AsignaturaRoutes from "./routes/AsignaturaRoutes.js"
 import TipoSolicitudRoutes from "./routes/TipoSolicitudRoutes.js"
-import { Server as SokectServer } from "socket.io";
-import http from 'http'
+
+
 
 
 
 const app = express()
-const server = http.createServer(app)
-const io= new SokectServer(server)
+
+
 
 app.use(express.json());
 
