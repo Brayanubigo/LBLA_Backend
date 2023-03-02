@@ -14,7 +14,7 @@ const emailOlvidePassword= async(datos) => {
 
       //enviar email
       const info = await transport.sendMail({
-        from: "LBLA SISTEMA DE SOLICITUD",
+        from: "lblainsumos@gmail.com",
         to: email,
         subject: 'Reestablece tu Contraseña',
         text: 'Reestablece tu Contraseña',

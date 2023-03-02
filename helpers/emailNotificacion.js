@@ -14,7 +14,7 @@ const emailNotificacion= async(datos) => {
 
       //enviar email
       const info = await transport.sendMail({
-        from: `LBLA SISTEMA DE SOLICITUD`,
+        from: `lblainsumos@gmail.com`,
         to: email,
         subject: `SOLICITUD DE ${nombre} DEL CURSO ${curso} `,
         text: 'Notificacion de solicitud',
