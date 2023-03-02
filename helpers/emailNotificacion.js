@@ -21,7 +21,9 @@ const emailNotificacion= async(datos) => {
         html: ` <p> Hola: Carlos, El profesor ${nombre} del curso ${curso} .</p>
         <p> ha solicitado  ${tipo} con una cantidad de ${cantidad} para la Asignatura de ${asignatura} .</p>
         <p> con descripcion de: ${descripcion} .</p>
-        <p>Esta es un mensaje para notificar una solicitud</p>
+        <a href="${process.env.FRONTEND_URL}/admin/ver-soli">Ver Solicitudes</a></p> 
+
+        <p>Este es un mensaje para notificar una solicitud</p>
         `
 
       });
