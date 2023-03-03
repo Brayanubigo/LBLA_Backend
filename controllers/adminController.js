@@ -1,7 +1,7 @@
 import Admin from "../models/Admin.js";
 import generarJWT from "../helpers/generarJWT.js"
 import generarId from "../helpers/generarid.js";
-
+import emailOlvidePassword from "../helpers/emailOlvidePassword.js";
 
 
 
@@ -102,6 +102,11 @@ const olvidePassword = async (req,res) =>{
    try {
         existeAdmin.token= generarId();
         await existeAdmin.save()
+        emailOlvidePassword({
+            email,
+            nombre: existeAdmin.nombre,
+            token:existeAdmin.token
+        });
         res.json({msg: 'Hemos enviado un email con las instrucciones'})
    } catch (error) {
     console.log(error)
