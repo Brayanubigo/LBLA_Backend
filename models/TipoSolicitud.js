@@ -4,6 +4,11 @@ const  tipoSolicitudSchema = mongoose.Schema({
         type: String,
         require:true,
         trim:true
+    },
+    stock:{
+        type:Number,
+        require:true
+
     }
  
    

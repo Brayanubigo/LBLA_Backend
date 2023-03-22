@@ -1,6 +1,3 @@
-
-import generarJWT from "../helpers/generarJWT.js"
-import generarId from "../helpers/generarid.js";
 import Asignatura from "../models/Asignatura.js";
 
 
@@ -33,6 +30,17 @@ const registrar = async (req,res) =>{
     
 };
 
+const actualizar = async (req,res) =>{
+    const {_id} = req.params;
+   
+   
+    const existeAsig = await Asignatura.findByIdAndUpdate(_id, req.body)
+    res.json( existeAsig)
+   
+};
+
+
+
 const perfil = async (req,res) =>{
 
     const existeAsignaruta = await Asignatura.find({})
@@ -45,7 +53,7 @@ const eliminar = async (req,res) =>{
   
   const asignatura = await Asignatura.findByIdAndDelete(asigna_id);
 
-    console.log(asigna_id)
+   
 
   res.json(asignatura);
 };
@@ -53,7 +61,8 @@ const eliminar = async (req,res) =>{
 export {
     registrar,
     perfil,
-    eliminar
+    eliminar,
+    actualizar
 
     
 }

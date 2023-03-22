@@ -1,6 +1,5 @@
 import Curso from "../models/Curso.js";
-import generarJWT from "../helpers/generarJWT.js"
-import generarId from "../helpers/generarid.js";
+
 
 
 
@@ -44,15 +43,26 @@ const eliminar = async (req,res) =>{
   
   const curso = await Curso.findByIdAndDelete(curso_id);
 
-    console.log(curso)
+   
 
   res.json(curso);
 };
 
+const actualizar = async (req,res) =>{
+    const {_id} = req.params;
+    const {nombre, stock} = req.body
+  
+    const existeCurso = await Curso.findByIdAndUpdate(_id, req.body)
+    res.json( existeCurso)
+    
+};
+
+
 export {
     registrar,
     perfil,
-    eliminar
+    eliminar,
+    actualizar
 
     
 }

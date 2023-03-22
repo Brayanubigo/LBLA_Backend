@@ -1,20 +1,36 @@
 import Solicitud from "../models/Solicitud.js";
-import generarJWT from "../helpers/generarJWT.js"
-import generarId from "../helpers/generarid.js";
+
 import emailNotificacion from "../helpers/emailNotificacion.js";
+import tipoSolicitud from "../models/TipoSolicitud.js";
 
 
 
-
-const registrar = async (req,res) =>{
+const enviar = async (req,res) =>{
    
     const {email,nombre,tipo,curso,cantidad,asignatura,descripcion} = req.body
     try {
         //Guardar el usuario
         
-        const solicitud = new Solicitud(req.body);
-        const solicitudGuardada = await solicitud.save();
         
+       
+       
+       
+        const getInsumo = await tipoSolicitud.findOne({nombre:tipo});
+       
+        const stock =  getInsumo.stock;
+       
+        const restarStock = stock - cantidad
+        if(restarStock <0){
+            return  res.status(400).json({msg: 'La cantidad excede al stock actual o No hay stock'});
+
+        }
+
+       
+        getInsumo.stock = restarStock;
+        await getInsumo.save();
+        
+        const solicitud = new Solicitud(req.body);
+        await solicitud.save();
         emailNotificacion({
             email,
             nombre,
@@ -24,8 +40,7 @@ const registrar = async (req,res) =>{
             asignatura,
             descripcion
         })
-        
-        res.json(solicitudGuardada);
+        return  res.status(200).json({msg: 'Solicitud enviada'});
     } catch (error) {
         console.log(error);
     }
@@ -99,7 +114,7 @@ const eliminar = async (req,res) =>{
 
 
 export {
-    registrar,
+    enviar,
     perfil,
     eliminar,
     estadosi,

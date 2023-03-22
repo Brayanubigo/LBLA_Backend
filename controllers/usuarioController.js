@@ -176,7 +176,7 @@ const eliminar = async (req,res) =>{
     
     const usuario = await Usuario.findByIdAndDelete(user_id);
   
-      console.log(usuario)
+      
   
     res.json(usuario);
   };

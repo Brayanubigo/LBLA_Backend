@@ -1,6 +1,4 @@
 import tipoSolicitud from "../models/TipoSolicitud.js";
-import generarJWT from "../helpers/generarJWT.js"
-import generarId from "../helpers/generarid.js";
 
 
 
@@ -13,7 +11,7 @@ const registrar = async (req,res) =>{
     const existeTipo = await tipoSolicitud.findOne({nombre})
 
     if(existeTipo){
-       const error = new Error('Curso ya registrado');
+       const error = new Error('Insumo ya registrado');
        return res.status(400).json({msg: error.message});
     }
         
@@ -38,13 +36,23 @@ const perfil = async (req,res) =>{
     res.json( existeTipo)
 };
 
+const actualizar = async (req,res) =>{
+    const {_id} = req.params;
+    const {nombre, stock} = req.body
+   
+    const existeTipo = await tipoSolicitud.findByIdAndUpdate(_id, req.body)
+    res.json( existeTipo)
+  
+};
+
+
 
 const eliminar = async (req,res) =>{
   const {tipo_id} = req.params;
   
   const tipo = await tipoSolicitud.findByIdAndDelete(tipo_id);
 
-    console.log(tipo)
+
 
   res.json(tipo);
 };
@@ -52,7 +60,8 @@ const eliminar = async (req,res) =>{
 export {
     registrar,
     perfil,
-    eliminar
+    eliminar,
+    actualizar
 
     
 }
